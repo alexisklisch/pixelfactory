@@ -1,0 +1,29 @@
+{
+  "name": "pixelfactory",
+  "version": "0.0.1",
+  "description": "Transform complex design JSON files into stunning visuals effortlessly. Pixelfactory is a lightweight, high-performance library that lets you generate custom designs on the fly, anywhere—whether you're working in the browser or beyond.",
+  "main": "dist/bundle.cjs",
+  "module": "dist/bundle.mjs",
+  "scripts": {
+    "build:rs": "rspack build"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/bundle.mjs",
+      "require": "./dist/bundle.cjs"
+    }
+  },
+  "keywords": [
+    "design",
+    "json",
+    "flyers",
+    "canvas",
+    "blob",
+    "image-processing",
+    "frontend",
+    "javascript",
+    "pixelfactory"
+  ],
+  "author": "Alexis Fleitas Klisch",
+  "license": "MIT" 
+}

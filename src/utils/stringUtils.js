@@ -1,0 +1,1 @@
+export const separateWords = (string, separator = ' ') => string.split(separator)
