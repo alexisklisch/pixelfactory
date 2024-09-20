@@ -1,6 +1,6 @@
 {
   "name": "pixelfactory",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Transform complex design JSON files into stunning visuals effortlessly. Pixelfactory is a lightweight, high-performance library that lets you generate custom designs on the fly, anywhere—whether you're working in the browser or beyond.",
   "main": "dist/bundle.cjs",
   "module": "dist/bundle.mjs",
