@@ -1,7 +1,7 @@
 // worker.js
-import { getPresetSize } from '../utils/getPresetSize.js';
-import { separateWords } from '../utils/stringUtils.js';
-import { recursiveShapes } from '../handlers/recursiveShapes.js'
+import { getPresetSize } from './utils/getPresetSize.js';
+import { separateWords } from './utils/stringUtils.js';
+import { recursiveShapes } from './handlers/recursiveShapes.js'
 
 self.onmessage = async function(event) {
 

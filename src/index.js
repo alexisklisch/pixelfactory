@@ -14,7 +14,7 @@ class DsgnResolver  {
   #processWorkspaceInWorker(workspace) {
     return new Promise((resolve, reject) => {
 
-      const worker = new Worker(new URL('./workers/convertWorker.worker.js', import.meta.url), { type: "module", name: 'convertWorker' })
+      const worker = new Worker(new URL('./convertWorker.js', import.meta.url), { type: "module", name: 'converter' })
       
       worker.postMessage({workspace, config: this.config})  // Enviar el workspace al worker
 
