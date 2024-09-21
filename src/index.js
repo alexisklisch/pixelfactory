@@ -1,3 +1,5 @@
+import { processWorkspace } from "./functions/processWorkspace.js"
+
 class DsgnResolver  {
   constructor(dsgn, config = { isServer: false }) {
     this.dsgn = dsgn
@@ -6,31 +8,18 @@ class DsgnResolver  {
   }
 
   async getImages() {
-    const promises = this.dsgn.workspaces.map(wrksp => this.#processWorkspaceInWorker(wrksp))
+    const promises = this.dsgn.workspaces.map(wrksp => this.#processWorkspace(wrksp))
     this.designs = await Promise.all(promises)
     return this.designs
   }
 
-  #processWorkspaceInWorker(workspace) {
-    return new Promise((resolve, reject) => {
-
-      const worker = new Worker(new URL('./convertWorker.js', import.meta.url), { type: "module", name: 'converter' })
-      
-      worker.postMessage({workspace, config: this.config})  // Enviar el workspace al worker
-
-      worker.onmessage = (event) => {
-        const blob = event.data
-        if (blob.error) {
-          reject(new Error(blob.error))
-        } else {
-          resolve(blob)
-        }
-        worker.terminate()  // Finalizar el worker cuando termine el trabajo
-      }
-
-      worker.onerror = (err) => {
-        reject(err)
-        worker.terminate()
+  #processWorkspace(workspace) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const blob = await processWorkspace(workspace, this.config)
+        resolve(blob)
+      } catch (error) {
+        reject(error)
       }
     })
   }
