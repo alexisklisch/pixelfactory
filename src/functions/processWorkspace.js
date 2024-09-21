@@ -27,9 +27,8 @@ export async function processWorkspace(workspace, config) {
   
   // Dibujar los hijos del workspace
   for (const child of workspace.children) {
-      await recursiveShapes(child, ctx);
+    await recursiveShapes(child, ctx);
   }
-  
 
   // Convertir canvas a Blob y enviar de vuelta al hilo principal
   const blob = canvas.convertToBlob({ type: "image/png" })

@@ -7,8 +7,8 @@ export async function recursiveShapes (shape, ctx) {
     if (shape.type === 'ellipse') {
         if (shape.styles.background.includes('image')) {
             await applyStyles(shape, ctx)
-
         } else {
+            console.log(shape)
             ctx.save()
             ctx.translate(shape.x + shape.width / 2, shape.y  + shape.height / 2)
     
@@ -42,11 +42,11 @@ export async function recursiveShapes (shape, ctx) {
         ctx.closePath()
     }
 
-    // Grup
+    // Group
 
     if (shape.type === 'group') {
         for (const child of shape.children) {
-            recursiveShapes(child, ctx)
+            await recursiveShapes(child, ctx)
         }
     }
 }
@@ -201,14 +201,13 @@ async function applyStyles (shape, ctx) {
   const { stroke } = styles
 
   if (stroke) {
-        console.log(stroke)
-      const [ lineWith, color ] = separateWords(stroke)
-      // ctx.setLineDash([25, 10]) Add stroke style
-      ctx.lineWidth = lineWith
-      ctx.strokeStyle = color
-      ctx.stroke()
-      ctx.restore()
-      ctx.closePath()
+    const [ lineWith, color ] = separateWords(stroke)
+    // ctx.setLineDash([25, 10]) Add stroke style
+    ctx.lineWidth = lineWith
+    ctx.strokeStyle = color
+    ctx.stroke()
+    ctx.restore()
+    ctx.closePath()
   }
 
 }

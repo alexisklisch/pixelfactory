@@ -1,0 +1,111 @@
+{
+  "version": "0.0.1",
+  "design": {
+    "author": "Alexis Fleitas Klisch",
+    "name": "Chiarita Institución",
+    "tagname": "chiarita_institucion",
+    "version": "1.8.21",
+    "lastUpdate": "2011-10-05T14:48:00.000Z"
+  },
+  "workspaces": [
+    {
+      "size": "@storie",
+      "page": 2,
+      "styles": {
+        "background": "solid #f2f2f2"
+      },
+      "layers": [
+        {
+          "id": 0,
+          "name": "layer-1",
+          "z": 0
+        },
+        {
+          "id": 1,
+          "name": "estructura",
+          "z": 1
+        }
+      ],
+      "children": [
+        {
+          "id": "h74Klk99f",
+          "type": "group",
+          "layerId": 0,
+          "x": 324,
+          "y": 210,
+          "z": 0,
+          "height": 624,
+          "width": 926,
+          "styles": {},
+          "children": [
+            {
+              "id": "81hBMkH7gM",
+              "shape": "square",
+              "layerId": 0,
+              "x": 324,
+              "y": 210,
+              "z": 0,
+              "height": 624,
+              "width": 926,
+              "styles": {},
+              "children": []
+            },
+            {
+              "id": "KDh6eP98hV",
+              "shape": "ellipse",
+              "layerId": 0,
+              "x": 120,
+              "y": 810,
+              "z": 1,
+              "height": 300,
+              "width": 300,
+              "styles": {},
+              "children": []
+            },
+            {
+              "id": "ne0vElZu6k",
+              "shape": "polygon",
+              "layerId": 0,
+              "x": 235,
+              "y": 1010,
+              "z": 1,
+              "height": 300,
+              "width": 300,
+              "styles": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "j8Z10POgOy",
+          "shape": "rect",
+          "layerId": 1,
+          "x": 345,
+          "y": 567,
+          "z": 0,
+          "height": 264,
+          "width": 512,
+          "styles": {
+            "background": "img mock(@priority(1),#f3f3f3)"
+          }
+        },
+        {
+          "id": "j8Z10POgOy",
+          "shape": "rect",
+          "layerId": 1,
+          "x": 345,
+          "y": 567,
+          "z": 0,
+          "height": 264,
+          "width": 512,
+          "styles": {
+            "background": "img mock(@priority(1),#f3f3f3)"
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "flyersUser": "alexisklisch"
+  }
+}

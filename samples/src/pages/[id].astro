@@ -1,0 +1,34 @@
+---
+import { getCollection } from "astro:content"
+import type { GetStaticPaths } from "astro";
+import { basename } from 'node:path'
+import Layout from '../layouts/Layout.astro'
+
+export const getStaticPaths: GetStaticPaths = (async () => {
+	const coll = await getCollection('designs')
+	
+	return coll.map((entry) => {
+    const pathname = basename(entry.id, '.dsgn')
+
+    return {
+      params: {id: pathname},
+      props: entry
+    }
+	})
+})
+
+const {data} = Astro.props
+
+
+---
+<Layout>
+  <h1>{data.design.author}</h1>
+  <h2>{data.design.name}</h2>
+</Layout>
+<script>
+  import { DsgnResolver } from 'pixelfactory'
+  import design from '../content/designs/01-japan-flag.dsgn.json'
+
+  const resolver = new DsgnResolver(design)
+  console.log(await resolver.getImages())
+</script>
