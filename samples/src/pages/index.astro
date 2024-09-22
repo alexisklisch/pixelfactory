@@ -1,12 +1,23 @@
 ---
+import { getCollection } from 'astro:content'
 import Layout from '../layouts/Layout.astro'
+import { basename } from 'node:path'
 
+const coll = await getCollection('designs')
+	
+const paths = coll.map((entry) => ({
+	pathname: basename(entry.id, '.dsgn'),
+	name: entry.data.design.name
+}))
+
+
+console.log(paths)
 ---
 
 <Layout title="Pixel Factory Examples">
 	<main>
 		<ol>
-			<li><a href="/01-japan-flag">Japan Flag</a></li>
+			{ paths.map(route => <li><a href={`/${route.pathname}`}>{route.name}</a></li>) }
 		</ol>
 	</main>
 </Layout>

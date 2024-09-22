@@ -1,3 +1,45 @@
 {
-  "nombre": "armaldo"
+  "version": "0.0.1",
+  "design": {
+    "author": "Armando Paredes",
+    "name": "Gradient World",
+    "tagname": "gradient-world",
+    "version": "0.1",
+    "lastUpdate": "2011-10-05T14:48:00.000Z"
+  },
+  "workspaces": [
+    {
+      "size": "400x700",
+      "page": 1,
+      "styles": {
+        "background": "solid blue"
+      },
+      "layers": [
+        {
+          "id": 0,
+          "name": "layer-1",
+          "z": 0
+        }
+      ],
+      "children": [
+        {
+          "id": "h74Klk99f",
+          "type": "ellipse",
+          "layerId": 0,
+          "x": 45,
+          "y": 20,
+          "z": 0,
+          "height": 120,
+          "width": 120,
+          "styles": {
+            "background": "gradient @linear(red,green) to-r"
+          },
+          "children": []
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "flyersUser": "alexisklisch"
+  }
 }

@@ -34,8 +34,5 @@
     "@rspack/cli": "^1.0.5",
     "@rspack/core": "^1.0.5",
     "worker-rspack-loader": "3.1.0"
-  },
-  "dependencies": {
-    "pixelfactory": "^0.0.4"
   }
 }

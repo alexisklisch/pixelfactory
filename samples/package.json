@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.3",
     "astro": "5.0.0-beta.1",
+    "pixelfactory": "link:..",
     "typescript": "^5.6.2"
   },
   "devDependencies": {

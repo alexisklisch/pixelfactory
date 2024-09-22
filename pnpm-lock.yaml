@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      pixelfactory:
-        specifier: ^0.0.4
-        version: 0.0.4
     devDependencies:
       '@rspack/cli':
         specifier: ^1.0.5
@@ -889,9 +885,6 @@ packages:
   picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
-
-  pixelfactory@0.0.4:
-    resolution: {integrity: sha512-KU2bg2mutIhknlleWbhXD5tGA1mAMhSel1fQkd7FFTGo34lQrbqXAVMNeegY7qXPLTmhJxxc4r5qWhYCk0KJPw==}
 
   process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
@@ -2106,8 +2099,6 @@ snapshots:
   picocolors@1.1.0: {}
 
   picomatch@2.3.1: {}
-
-  pixelfactory@0.0.4: {}
 
   process-nextick-args@2.0.1: {}
 

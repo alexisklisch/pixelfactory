@@ -18,17 +18,38 @@ export const getStaticPaths: GetStaticPaths = (async () => {
 })
 
 const {data} = Astro.props
-
-
 ---
-<Layout>
-  <h1>{data.design.author}</h1>
+<Layout title={data.design.name}>
+  <h1 data-message={JSON.stringify(data)}>{data.design.author}</h1>
   <h2>{data.design.name}</h2>
+  <div class="container"></div>
 </Layout>
+
+<style is:global>
+  .container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .container img {
+    max-width: 400px;
+  }
+</style>
+
 <script>
   import { DsgnResolver } from 'pixelfactory'
-  import design from '../content/designs/01-japan-flag.dsgn.json'
+  const $design = document.querySelector('h1')?.getAttribute('data-message')
+  const design = JSON.parse($design)
 
   const resolver = new DsgnResolver(design)
-  console.log(await resolver.getImages())
+  const imgs = await resolver.getImages()
+  imgs.forEach(blob => {
+    const $newImg = new Image()
+    const imageUrl = URL.createObjectURL(blob);
+    $newImg.src = imageUrl
+
+    document.querySelector('.container')!.appendChild($newImg)
+  })
 </script>

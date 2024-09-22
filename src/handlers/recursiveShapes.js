@@ -8,15 +8,14 @@ export async function recursiveShapes (shape, ctx) {
         if (shape.styles.background.includes('image')) {
             await applyStyles(shape, ctx)
         } else {
-            console.log(shape)
             ctx.save()
             ctx.translate(shape.x + shape.width / 2, shape.y  + shape.height / 2)
     
             ctx.beginPath()
-            ctx.ellipse(shape.x, shape.y, shape.width / 2, shape.height / 2, 0, 0, 2 * Math.PI)
+            ctx.ellipse(0, 0, shape.width / 2, shape.height / 2, 0, 0, 2 * Math.PI)
             ctx.clip()
-            await applyStyles(shape, ctx)
             ctx.restore()
+            await applyStyles(shape, ctx)
             
     
             ctx.closePath()
@@ -70,10 +69,13 @@ async function applyStyles (shape, ctx) {
             const colorStops = linearValues.split(',')
 
             // Dirección
-            let x1 = x, y1 = y, x2 = x + width, y2 = y + height;
+            let x1 = x, y1 = y, x2 = x + width, y2 = y + height
 
+            console.log(colorStops)
             // Cambiar las coordenadas según el valor de 'gradientDirection'
-            switch (backgroundValues[2]) {
+            const gradientDirection = backgroundValues[2]
+            console.log(styles, width, height, x, y)
+            switch (gradientDirection) {
                 case 'to-t':
                     x1 = x; y1 = y + height;
                     x2 = x; y2 = y;
@@ -174,15 +176,18 @@ async function applyStyles (shape, ctx) {
         if (shape.type === 'ellipse') {
             ctx.save();
 
+            // Posicionar el origen en el centro de la elipse
             ctx.translate(x + width / 2, y + height / 2);
+
             ctx.beginPath();
-            ctx.ellipse(0, 0, width / 2, height / 2, 0, 0, Math.PI * 2);
+            // Dibujar el clip de la elipse con coordenadas relativas (0, 0) después del translate
+            ctx.ellipse(0, 0, width / 2, height / 2, 0, 0, 2 * Math.PI);
             ctx.clip(); // Aplicar el clipping
 
-            // Ajustar la imagen a la elipse
+            // Ajustar la imagen a la elipse, usando coordenadas relativas (-dWidth / 2, -dHeight / 2)
             ctx.drawImage(img, sx, sy, sWidth, sHeight, -dWidth / 2, -dHeight / 2, dWidth, dHeight);
 
-            ctx.restore();
+            ctx.restore()
         } else {
             ctx.save();
             ctx.clip(); // Aplicar el clipping
