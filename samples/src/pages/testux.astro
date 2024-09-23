@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+<Layout title="El testux">
+
+</Layout>
+
+<script>
+  import { createCanvas } from "canvas"
+  import { DsgnResolver } from 'pixelfactory'
+  import dsgn from '../content/designs/01-japan-flag.dsgn.json'
+
+  const resolver = new DsgnResolver(dsgn, {isServer: true, serverCanvas: createCanvas})
+  console.log(resolver.getImages())
+
+</script>

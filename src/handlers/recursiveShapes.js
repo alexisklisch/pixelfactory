@@ -3,6 +3,18 @@ import { separateWords } from "../utils/stringUtils.js"
 
 export async function recursiveShapes (shape, ctx) {
 
+    // Rotation
+    let rotateStyle = shape.styles.rotate || null
+    if (rotateStyle) {
+        const [rawAngle] = rotateStyle.split('deg')
+        const angle = parseFloat(rawAngle) * (Math.PI / 180)
+
+        ctx.save()
+        ctx.translate(shape.x + shape.width / 2, shape.y + shape.height / 2)
+        ctx.rotate(angle)
+        ctx.translate(-(shape.x + shape.width / 2), -(shape.y + shape.height / 2))
+    }
+
     // Elipse
     if (shape.type === 'ellipse') {
         if (shape.styles.background.includes('image')) {
@@ -30,13 +42,19 @@ export async function recursiveShapes (shape, ctx) {
         ctx.save()
         ctx.beginPath()
 
-        let borderRadius = shape.styles.borderRadius || 0
-        if (borderRadius) {
-            const [tl, tr, br, bl] = borderRadius.split(',')
-            borderRadius = { tl, tr, br, bl }
-        }
+        let radius = { tl: 0, tr: 0, br: 0, bl: 0 }
 
-        roundRect(ctx, shape.x, shape.y, shape.width, shape.height, borderRadius)
+        let borderRadius = shape.styles.borderRadius
+        if (borderRadius) {
+            if (typeof borderRadius === 'number') {
+                radius = { tl: borderRadius, tr: borderRadius, br: borderRadius, bl: borderRadius };
+            } else if (typeof borderRadius === 'string') {
+                const [tl, tr, br, bl] = borderRadius.split(',')
+                radius = { tl, tr, br, bl }
+            }
+        }
+        console.log(radius)
+        roundRect(ctx, shape.x, shape.y, shape.width, shape.height, radius)
         await applyStyles(shape, ctx)
         ctx.closePath()
     }
@@ -48,6 +66,12 @@ export async function recursiveShapes (shape, ctx) {
             await recursiveShapes(child, ctx)
         }
     }
+
+    // Restaurar el contexto después de rotar si se aplicó la rotación
+    if (rotateStyle) {
+        ctx.restore();
+    }
+
 }
 
 async function applyStyles (shape, ctx) {
@@ -71,10 +95,8 @@ async function applyStyles (shape, ctx) {
             // Dirección
             let x1 = x, y1 = y, x2 = x + width, y2 = y + height
 
-            console.log(colorStops)
             // Cambiar las coordenadas según el valor de 'gradientDirection'
             const gradientDirection = backgroundValues[2]
-            console.log(styles, width, height, x, y)
             switch (gradientDirection) {
                 case 'to-t':
                     x1 = x; y1 = y + height;
@@ -218,12 +240,6 @@ async function applyStyles (shape, ctx) {
 }
 
 function roundRect(ctx, x, y, width, height, radius) {
-    if (typeof radius === 'number') {
-      radius = { tl: radius, tr: radius, br: radius, bl: radius };
-    } else {
-      radius = Object.assign({ tl: 0, tr: 0, br: 0, bl: 0 }, radius);
-    }
-  
     ctx.beginPath();
     ctx.moveTo(x + radius.tl, y);
     ctx.lineTo(x + width - radius.tr, y);

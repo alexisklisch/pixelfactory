@@ -1,7 +1,7 @@
 import { processWorkspace } from "./functions/processWorkspace.js"
 
 class DsgnResolver  {
-  constructor(dsgn, config = { isServer: false }) {
+  constructor(dsgn, config = { isServer: false, serverCanvas: null }) {
     this.dsgn = dsgn
     this.config = config
     this.designs = []
